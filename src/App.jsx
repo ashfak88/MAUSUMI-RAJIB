@@ -1605,9 +1605,14 @@ export default function WeddingApp() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [showOpener, setShowOpener] = React.useState(true);
   const [isPlaying, setIsPlaying] = React.useState(false);
+  
+  // Initial pre-cued URL so YouTube buffers at 48s while user views envelope
+  const [iframeSrc, setIframeSrc] = React.useState(
+    `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&autoplay=0&start=${MUSIC_START_TIME}&playsinline=1&controls=0&mute=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`
+  );
+
+  const iframeRef = React.useRef(null);
   const playerRef = React.useRef(null);
-  const isReadyRef = React.useRef(false);
-  const autoPlayRequestedRef = React.useRef(false);
   const hasStartedRef = React.useRef(false);
 
   React.useEffect(() => {
@@ -1617,48 +1622,65 @@ export default function WeddingApp() {
     };
   }, [isOpen]);
 
-  // Initialize YouTube IFrame Audio Player
+  // Post message directly to YouTube iframe contentWindow
+  const postCommand = React.useCallback((func, args = []) => {
+    try {
+      if (iframeRef.current && iframeRef.current.contentWindow) {
+        iframeRef.current.contentWindow.postMessage(
+          JSON.stringify({ event: "command", func, args }),
+          "*"
+        );
+      }
+    } catch (_) {}
+  }, []);
+
+  // Listen to postMessage responses from YouTube player
+  React.useEffect(() => {
+    const handleMessage = (e) => {
+      try {
+        const data = typeof e.data === "string" ? JSON.parse(e.data) : e.data;
+        if (data && data.event === "infoDelivery" && data.info) {
+          if (data.info.playerState === 1) {
+            setIsPlaying(true);
+            hasStartedRef.current = true;
+          } else if (data.info.playerState === 2) {
+            setIsPlaying(false);
+          } else if (data.info.playerState === 0) {
+            // Loop back to 48s seamlessly
+            postCommand("seekTo", [MUSIC_START_TIME, true]);
+            postCommand("playVideo");
+            setIsPlaying(true);
+          }
+        }
+      } catch (_) {}
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [postCommand]);
+
+  // Initialize YT.Player on the existing iframe for dual reliable control
   React.useEffect(() => {
     let isMounted = true;
 
     const setupPlayer = () => {
-      if (!isMounted) return;
-      if (!window.YT || !window.YT.Player) return;
-      if (playerRef.current) return;
-
+      if (!isMounted || !window.YT || !window.YT.Player || playerRef.current) return;
       try {
         playerRef.current = new window.YT.Player("wedding-yt-audio", {
-          videoId: YOUTUBE_VIDEO_ID,
-          playerVars: {
-            autoplay: 0,
-            start: MUSIC_START_TIME,
-            controls: 0,
-            disablekb: 1,
-            fs: 0,
-            rel: 0,
-            playsinline: 1,
-            loop: 1,
-            playlist: YOUTUBE_VIDEO_ID,
-            origin: window.location.origin,
-          },
           events: {
             onReady: (event) => {
               if (!isMounted) return;
-              isReadyRef.current = true;
               try {
                 event.target.unMute();
-                event.target.setVolume(85);
+                event.target.setVolume(100);
               } catch (_) {}
 
-              if (autoPlayRequestedRef.current) {
+              if (hasStartedRef.current) {
                 try {
                   event.target.seekTo(MUSIC_START_TIME, true);
                   event.target.playVideo();
                   setIsPlaying(true);
-                  hasStartedRef.current = true;
-                } catch (e) {
-                  console.warn("Autoplay deferred:", e);
-                }
+                } catch (_) {}
               }
             },
             onStateChange: (event) => {
@@ -1669,7 +1691,6 @@ export default function WeddingApp() {
               } else if (event.data === window.YT.PlayerState.PAUSED) {
                 setIsPlaying(false);
               } else if (event.data === window.YT.PlayerState.ENDED) {
-                // Loop back to 48s seamlessly
                 try {
                   event.target.seekTo(MUSIC_START_TIME, true);
                   event.target.playVideo();
@@ -1677,14 +1698,9 @@ export default function WeddingApp() {
                 } catch (_) {}
               }
             },
-            onError: (err) => {
-              console.warn("YouTube player error:", err);
-            },
           },
         });
-      } catch (err) {
-        console.warn("YT init error:", err);
-      }
+      } catch (_) {}
     };
 
     if (window.YT && window.YT.Player) {
@@ -1701,7 +1717,7 @@ export default function WeddingApp() {
           clearInterval(poll);
           setupPlayer();
         }
-      }, 250);
+      }, 300);
 
       return () => {
         isMounted = false;
@@ -1714,71 +1730,89 @@ export default function WeddingApp() {
     };
   }, []);
 
+  // When clicking the wax seal button: instant playback at 48 seconds
   const handleOpen = () => {
     setIsOpen(true);
-    autoPlayRequestedRef.current = true;
+    hasStartedRef.current = true;
+    setIsPlaying(true);
 
-    // Start playing music immediately on user gesture
-    if (playerRef.current && isReadyRef.current) {
+    // 1. Instant postMessage to the buffered iframe (synchronous in user click context)
+    postCommand("unMute");
+    postCommand("setVolume", [100]);
+    postCommand("seekTo", [MUSIC_START_TIME, true]);
+    postCommand("playVideo");
+
+    // 2. Also call YT.Player API if attached
+    if (playerRef.current) {
       try {
         playerRef.current.unMute();
-        playerRef.current.setVolume(85);
+        playerRef.current.setVolume(100);
         playerRef.current.seekTo(MUSIC_START_TIME, true);
         playerRef.current.playVideo();
-        setIsPlaying(true);
-        hasStartedRef.current = true;
-      } catch (err) {
-        console.warn("Failed to start music on open:", err);
-      }
+      } catch (_) {}
     }
 
-    // Remove opener from DOM after the sliding doors finish parting
+    // 3. Fallback: activate direct autoplay=1 embed inside the click event
+    const activeUrl = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?enablejsapi=1&autoplay=1&start=${MUSIC_START_TIME}&playsinline=1&controls=0&mute=0&loop=1&playlist=${YOUTUBE_VIDEO_ID}`;
+    setIframeSrc(activeUrl);
+
+    // Slide open doors animation
     window.setTimeout(() => setShowOpener(false), 1200);
   };
 
   const toggleMusic = () => {
-    if (!playerRef.current || !isReadyRef.current) {
-      autoPlayRequestedRef.current = true;
-      return;
-    }
-
-    try {
-      if (isPlaying) {
-        playerRef.current.pauseVideo();
-        setIsPlaying(false);
-      } else {
-        playerRef.current.unMute();
-        playerRef.current.setVolume(85);
-        if (!hasStartedRef.current) {
-          playerRef.current.seekTo(MUSIC_START_TIME, true);
-          hasStartedRef.current = true;
-        }
-        playerRef.current.playVideo();
-        setIsPlaying(true);
+    hasStartedRef.current = true;
+    if (isPlaying) {
+      postCommand("pauseVideo");
+      if (playerRef.current) {
+        try { playerRef.current.pauseVideo(); } catch (_) {}
       }
-    } catch (err) {
-      console.warn("Toggle music error:", err);
+      setIsPlaying(false);
+    } else {
+      postCommand("unMute");
+      postCommand("setVolume", [100]);
+      postCommand("playVideo");
+      if (playerRef.current) {
+        try {
+          playerRef.current.unMute();
+          playerRef.current.setVolume(100);
+          playerRef.current.playVideo();
+        } catch (_) {}
+      }
+      setIsPlaying(true);
     }
   };
 
   return (
     <Jsx.Fragment>
-      {/* Off-screen YouTube IFrame element */}
+      {/* 
+        In-viewport, completely invisible iframe.
+        Having it at top:0, left:0 prevents browsers from suspending background playback!
+      */}
       <div
         style={{
           position: "fixed",
-          bottom: "-400px",
-          right: "-400px",
-          width: "200px",
-          height: "200px",
-          opacity: 0.001,
-          pointerEvents: "none",
-          zIndex: -100,
+          top: 0,
+          left: 0,
+          width: "1px",
+          height: "1px",
+          opacity: 0.01,
           overflow: "hidden",
+          pointerEvents: "none",
+          zIndex: -1,
         }}
         aria-hidden="true"
       >
-        <div id="wedding-yt-audio" />
+        <iframe
+          ref={iframeRef}
+          id="wedding-yt-audio"
+          width="300"
+          height="200"
+          src={iframeSrc}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          title="Wedding Background Music"
+          style={{ border: 0 }}
+        />
       </div>
 
       {/* Floating Music Control Button */}
