@@ -1,4 +1,4 @@
-﻿import * as React from "react";
+import * as React from "react";
 import * as Jsx from "react/jsx-runtime";
 import confetti from "canvas-confetti";
 import {
@@ -267,12 +267,12 @@ function FloatingPetals({ count = 14, burst = false }) {
 const WEDDING_DATA = {
   bride: {
     name: "Mausumi",
-    fullName: "Mausumi Beperi",
+    fullName: "Mausumi Bepari",
     parents: {
-      father: "Nripendra Narayan Beperi",
-      mother: "Mamoni Beperi",
+      father: "Nripendra Narayan Bepari",
+      mother: "Mamoni Bepari",
     },
-    line: "Daughter of Mr. Nripendra Narayan Beperi & Mrs. Mamoni Beperi",
+    line: "Daughter of Mr. Nripendra Narayan Bepari & Mrs. Mamoni Bepari",
     image: "/gallery/DSC_4786.jpg",
   },
   groom: {
@@ -289,7 +289,7 @@ const WEDDING_DATA = {
   endISO: "2026-11-26T03:00:00+05:30",
   dateLabel: "Wednesday, 25 November 2026",
   timeLabel: "10:00 PM onwards",
-  muhurthamLabel: "Wedding Â· 10:00 PM",
+  muhurthamLabel: "Wedding · 10:00 PM",
   venue: {
     name: "Baromera",
     address: "Baromera",
@@ -454,7 +454,7 @@ function HeroSection() {
             transition={{ delay: 1.15, duration: 0.9 }}
             className="text-ivory mt-6 text-base tracking-[0.4em] uppercase font-medium"
           >
-            25 Â· 11 Â· 2026
+            25 · 11 · 2026
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -462,7 +462,7 @@ function HeroSection() {
             transition={{ delay: 1.35, duration: 0.9 }}
             className="text-ivory/70 mt-2 text-xs tracking-[0.28em] uppercase"
           >
-            Wednesday Â· Baromera
+            Wednesday · Baromera
           </motion.p>
         </motion.div>
       </div>
@@ -539,7 +539,7 @@ function SectionDivider({ label }) {
           {label}
         </span>
       ) : (
-        <span className="text-gold text-sm">âœ¦</span>
+        <span className="text-gold text-sm">✦</span>
       )}
       <span className="rule-gold w-16" />
     </div>
@@ -556,7 +556,7 @@ function PersonCard({ person, role }) {
         <div className="relative z-10 flex flex-col items-center text-center w-full">
           {/* Couple portrait from new images */}
           {person.image && (
-            <div className="relative mb-5">
+            <div className="relative mb-6">
               <div className="relative h-32 w-32 sm:h-36 sm:w-36 overflow-hidden rounded-full border-2 border-gold/60 shadow-gold p-1 bg-gradient-to-tr from-gold/40 via-gold/10 to-gold/40">
                 <img
                   src={person.image}
@@ -565,14 +565,11 @@ function PersonCard({ person, role }) {
                   className="h-full w-full object-cover rounded-full"
                 />
               </div>
-              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-secondary text-gold px-3 py-0.5 rounded-full border border-gold/40 text-[0.62rem] tracking-[0.2em] uppercase font-semibold">
-                âœ¦
-              </span>
             </div>
           )}
 
           {/* Role header with gold wings */}
-          <div className="inline-flex items-center justify-center gap-2.5">
+          <div className="inline-flex items-center justify-center gap-2.5 mt-1">
             <span className="rule-gold w-8 opacity-70" />
             <span className="text-gold text-[0.72rem] tracking-[0.45em] uppercase font-semibold">
               {role}
@@ -588,7 +585,7 @@ function PersonCard({ person, role }) {
           {/* Ornate Divider */}
           <div className="my-5 flex items-center justify-center gap-2.5 w-full">
             <span className="rule-gold w-20 opacity-80" />
-            <span className="text-gold text-sm leading-none">âœ¦</span>
+            <span className="text-gold text-sm leading-none">✦</span>
             <span className="rule-gold w-20 opacity-80" />
           </div>
 
@@ -837,7 +834,7 @@ function CountdownSection() {
         </FadeIn>
         <FadeIn delay={0.2}>
           <p className="text-ivory/65 mt-6 text-xs tracking-[0.25em] uppercase font-light">
-            {WEDDING_DATA.dateLabel} Â· 10:00 PM
+            {WEDDING_DATA.dateLabel} · 10:00 PM
           </p>
         </FadeIn>
       </div>
@@ -1028,7 +1025,7 @@ function FunctionsSection() {
                               marginBottom: 0,
                             }}
                           >
-                            {fn.day} Â· {fn.date}
+                            {fn.day} · {fn.date}
                           </p>
                         </div>
                       </div>
@@ -1155,7 +1152,7 @@ function CelebrationSection() {
                 November 2026
               </p>
               <p className="text-gold/90 text-xs tracking-[0.25em] uppercase mt-1 font-light">
-                Wednesday Â· 10:00 PM
+                Wednesday · 10:00 PM
               </p>
             </div>
             <div className="divide-gold/15 divide-y">
@@ -1313,7 +1310,7 @@ function FooterSection() {
               <span className="flex-1 text-left">{WEDDING_DATA.groom.name}</span>
             </p>
             <p className="text-ivory/50 mt-2 text-[0.6rem] tracking-[0.4em] uppercase">
-              25 Â· 11 Â· 2026 Â· Baromera
+              25 · 11 · 2026 · Baromera
             </p>
           </div>
         </FadeIn>
