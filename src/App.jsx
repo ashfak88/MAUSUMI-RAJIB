@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 import * as Jsx from "react/jsx-runtime";
 import confetti from "canvas-confetti";
 import {
@@ -289,7 +289,7 @@ const WEDDING_DATA = {
   endISO: "2026-11-26T03:00:00+05:30",
   dateLabel: "Wednesday, 25 November 2026",
   timeLabel: "10:00 PM onwards",
-  muhurthamLabel: "Wedding · 10:00 PM",
+  muhurthamLabel: "Wedding Â· 10:00 PM",
   venue: {
     name: "Baromera",
     address: "Baromera",
@@ -454,7 +454,7 @@ function HeroSection() {
             transition={{ delay: 1.15, duration: 0.9 }}
             className="text-ivory mt-6 text-base tracking-[0.4em] uppercase font-medium"
           >
-            25 · 11 · 2026
+            25 Â· 11 Â· 2026
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -462,7 +462,7 @@ function HeroSection() {
             transition={{ delay: 1.35, duration: 0.9 }}
             className="text-ivory/70 mt-2 text-xs tracking-[0.28em] uppercase"
           >
-            Wednesday · Baromera
+            Wednesday Â· Baromera
           </motion.p>
         </motion.div>
       </div>
@@ -539,7 +539,7 @@ function SectionDivider({ label }) {
           {label}
         </span>
       ) : (
-        <span className="text-gold text-sm">✦</span>
+        <span className="text-gold text-sm">âœ¦</span>
       )}
       <span className="rule-gold w-16" />
     </div>
@@ -566,7 +566,7 @@ function PersonCard({ person, role }) {
                 />
               </div>
               <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-secondary text-gold px-3 py-0.5 rounded-full border border-gold/40 text-[0.62rem] tracking-[0.2em] uppercase font-semibold">
-                ✦
+                âœ¦
               </span>
             </div>
           )}
@@ -588,7 +588,7 @@ function PersonCard({ person, role }) {
           {/* Ornate Divider */}
           <div className="my-5 flex items-center justify-center gap-2.5 w-full">
             <span className="rule-gold w-20 opacity-80" />
-            <span className="text-gold text-sm leading-none">✦</span>
+            <span className="text-gold text-sm leading-none">âœ¦</span>
             <span className="rule-gold w-20 opacity-80" />
           </div>
 
@@ -740,7 +740,7 @@ function GallerySection() {
               </div>
               <p style={{ textAlign:"center", marginTop:"10px", fontSize:"0.72rem", letterSpacing:"0.16em", fontStyle:"italic", fontFamily:"Georgia, serif", color:isActive?"rgba(212,175,55,0.95)":"rgba(212,175,55,0.4)", transition:"color 0.4s" }}>
                 <span style={{ fontFamily:"Jost, sans-serif", fontWeight:700, fontStyle:"normal", marginRight:"5px" }}>{String(idx + 1).padStart(2,"0")}</span>
-                � {photoTitles[idx % photoTitles.length]}
+                · {photoTitles[idx % photoTitles.length]}
               </p>
             </div>
           );
@@ -837,7 +837,7 @@ function CountdownSection() {
         </FadeIn>
         <FadeIn delay={0.2}>
           <p className="text-ivory/65 mt-6 text-xs tracking-[0.25em] uppercase font-light">
-            {WEDDING_DATA.dateLabel} · 10:00 PM
+            {WEDDING_DATA.dateLabel} Â· 10:00 PM
           </p>
         </FadeIn>
       </div>
@@ -1028,7 +1028,7 @@ function FunctionsSection() {
                               marginBottom: 0,
                             }}
                           >
-                            {fn.day} · {fn.date}
+                            {fn.day} Â· {fn.date}
                           </p>
                         </div>
                       </div>
@@ -1155,7 +1155,7 @@ function CelebrationSection() {
                 November 2026
               </p>
               <p className="text-gold/90 text-xs tracking-[0.25em] uppercase mt-1 font-light">
-                Wednesday · 10:00 PM
+                Wednesday Â· 10:00 PM
               </p>
             </div>
             <div className="divide-gold/15 divide-y">
@@ -1313,7 +1313,7 @@ function FooterSection() {
               <span className="flex-1 text-left">{WEDDING_DATA.groom.name}</span>
             </p>
             <p className="text-ivory/50 mt-2 text-[0.6rem] tracking-[0.4em] uppercase">
-              25 · 11 · 2026 · Baromera
+              25 Â· 11 Â· 2026 Â· Baromera
             </p>
           </div>
         </FadeIn>
@@ -1463,9 +1463,152 @@ function ScrollProgress() {
   );
 }
 
+const YOUTUBE_VIDEO_ID = "scaIhYlgy3Q";
+const MUSIC_START_TIME = 48; // Modhulogon starting at 0:48
+
+function FloatingMusicButton({ isPlaying, onToggle, isVisible }) {
+  const [showTooltip, setShowTooltip] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isPlaying) {
+      setShowTooltip(true);
+      const timer = setTimeout(() => setShowTooltip(false), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [isPlaying]);
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8, y: -10 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.8, y: -10 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="fixed top-4 right-4 z-40 sm:top-6 sm:right-6 flex items-center gap-2.5"
+        >
+          {/* Song Info Pill */}
+          <AnimatePresence>
+            {showTooltip && (
+              <motion.div
+                initial={{ opacity: 0, x: 10, scale: 0.95 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                exit={{ opacity: 0, x: 10, scale: 0.95 }}
+                className="pointer-events-none hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#1A0407]/90 border border-gold/45 shadow-gold backdrop-blur-md text-gold text-[0.68rem] tracking-wider font-medium"
+              >
+                <span className="font-serif italic">Modhulogon</span>
+                <span className="opacity-50">·</span>
+                <span className="opacity-80 font-sans uppercase text-[0.6rem] tracking-widest">
+                  {isPlaying ? "Playing" : "Paused"}
+                </span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+
+          {/* Floating Vinyl Disc Button */}
+          <motion.button
+            onClick={onToggle}
+            onMouseEnter={() => setShowTooltip(true)}
+            onMouseLeave={() => setShowTooltip(false)}
+            whileHover={{ scale: 1.08 }}
+            whileTap={{ scale: 0.92 }}
+            aria-label={isPlaying ? "Pause background music" : "Play background music"}
+            className="relative grid h-12 w-12 place-items-center rounded-full border border-gold/60 bg-[#1A0407]/95 text-gold shadow-gold backdrop-blur-md cursor-pointer select-none group"
+          >
+            {/* Outer animated gold aura when playing */}
+            {isPlaying && (
+              <motion.span
+                className="absolute -inset-1 rounded-full border border-gold/40 pointer-events-none"
+                animate={{ scale: [1, 1.25, 1], opacity: [0.65, 0, 0.65] }}
+                transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+              />
+            )}
+
+            {/* Rotating Disc */}
+            <motion.div
+              className="relative grid h-full w-full place-items-center rounded-full"
+              animate={isPlaying ? { rotate: 360 } : { rotate: 0 }}
+              transition={
+                isPlaying
+                  ? { repeat: Infinity, duration: 6, ease: "linear" }
+                  : { duration: 0.4 }
+              }
+            >
+              {/* Concentric subtle vinyl groove */}
+              <div
+                className="absolute inset-1 rounded-full border border-gold/25 pointer-events-none"
+                style={{
+                  background:
+                    "radial-gradient(circle, rgba(212,175,55,0.15) 0%, transparent 70%)",
+                }}
+              />
+              <IconMusic className="h-5 w-5 text-gold drop-shadow-[0_2px_8px_rgba(212,175,55,0.6)]" />
+            </motion.div>
+
+            {/* Diagonal pause slash when paused */}
+            {!isPlaying && (
+              <motion.div
+                initial={{ scaleX: 0 }}
+                animate={{ scaleX: 1 }}
+                className="absolute h-[2px] w-6 bg-gold/90 rotate-45 rounded-full pointer-events-none shadow-sm"
+              />
+            )}
+
+            {/* Miniature animated soundwave bars at corner */}
+            <div className="absolute -bottom-1 -right-1 flex items-end gap-[2px] bg-[#1A0407] px-1.5 py-0.5 rounded-full border border-gold/50 shadow-xs">
+              <motion.span
+                className="w-[2px] bg-gold rounded-full"
+                animate={
+                  isPlaying
+                    ? { height: ["3px", "10px", "4px", "11px", "3px"] }
+                    : { height: "3px" }
+                }
+                transition={{ repeat: Infinity, duration: 1.1, ease: "easeInOut" }}
+              />
+              <motion.span
+                className="w-[2px] bg-gold rounded-full"
+                animate={
+                  isPlaying
+                    ? { height: ["8px", "3px", "12px", "5px", "8px"] }
+                    : { height: "3px" }
+                }
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.1,
+                  delay: 0.2,
+                  ease: "easeInOut",
+                }}
+              />
+              <motion.span
+                className="w-[2px] bg-gold rounded-full"
+                animate={
+                  isPlaying
+                    ? { height: ["4px", "11px", "3px", "9px", "4px"] }
+                    : { height: "3px" }
+                }
+                transition={{
+                  repeat: Infinity,
+                  duration: 1.1,
+                  delay: 0.4,
+                  ease: "easeInOut",
+                }}
+              />
+            </div>
+          </motion.button>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+
 export default function WeddingApp() {
   const [isOpen, setIsOpen] = React.useState(false);
   const [showOpener, setShowOpener] = React.useState(true);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const playerRef = React.useRef(null);
+  const isReadyRef = React.useRef(false);
+  const autoPlayRequestedRef = React.useRef(false);
+  const hasStartedRef = React.useRef(false);
 
   React.useEffect(() => {
     document.body.style.overflow = isOpen ? "" : "hidden";
@@ -1474,14 +1617,177 @@ export default function WeddingApp() {
     };
   }, [isOpen]);
 
+  // Initialize YouTube IFrame Audio Player
+  React.useEffect(() => {
+    let isMounted = true;
+
+    const setupPlayer = () => {
+      if (!isMounted) return;
+      if (!window.YT || !window.YT.Player) return;
+      if (playerRef.current) return;
+
+      try {
+        playerRef.current = new window.YT.Player("wedding-yt-audio", {
+          videoId: YOUTUBE_VIDEO_ID,
+          playerVars: {
+            autoplay: 0,
+            start: MUSIC_START_TIME,
+            controls: 0,
+            disablekb: 1,
+            fs: 0,
+            rel: 0,
+            playsinline: 1,
+            loop: 1,
+            playlist: YOUTUBE_VIDEO_ID,
+            origin: window.location.origin,
+          },
+          events: {
+            onReady: (event) => {
+              if (!isMounted) return;
+              isReadyRef.current = true;
+              try {
+                event.target.unMute();
+                event.target.setVolume(85);
+              } catch (_) {}
+
+              if (autoPlayRequestedRef.current) {
+                try {
+                  event.target.seekTo(MUSIC_START_TIME, true);
+                  event.target.playVideo();
+                  setIsPlaying(true);
+                  hasStartedRef.current = true;
+                } catch (e) {
+                  console.warn("Autoplay deferred:", e);
+                }
+              }
+            },
+            onStateChange: (event) => {
+              if (!isMounted) return;
+              if (event.data === window.YT.PlayerState.PLAYING) {
+                setIsPlaying(true);
+                hasStartedRef.current = true;
+              } else if (event.data === window.YT.PlayerState.PAUSED) {
+                setIsPlaying(false);
+              } else if (event.data === window.YT.PlayerState.ENDED) {
+                // Loop back to 48s seamlessly
+                try {
+                  event.target.seekTo(MUSIC_START_TIME, true);
+                  event.target.playVideo();
+                  setIsPlaying(true);
+                } catch (_) {}
+              }
+            },
+            onError: (err) => {
+              console.warn("YouTube player error:", err);
+            },
+          },
+        });
+      } catch (err) {
+        console.warn("YT init error:", err);
+      }
+    };
+
+    if (window.YT && window.YT.Player) {
+      setupPlayer();
+    } else {
+      const prev = window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = () => {
+        if (typeof prev === "function") prev();
+        setupPlayer();
+      };
+
+      const poll = setInterval(() => {
+        if (window.YT && window.YT.Player) {
+          clearInterval(poll);
+          setupPlayer();
+        }
+      }, 250);
+
+      return () => {
+        isMounted = false;
+        clearInterval(poll);
+      };
+    }
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const handleOpen = () => {
     setIsOpen(true);
+    autoPlayRequestedRef.current = true;
+
+    // Start playing music immediately on user gesture
+    if (playerRef.current && isReadyRef.current) {
+      try {
+        playerRef.current.unMute();
+        playerRef.current.setVolume(85);
+        playerRef.current.seekTo(MUSIC_START_TIME, true);
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+        hasStartedRef.current = true;
+      } catch (err) {
+        console.warn("Failed to start music on open:", err);
+      }
+    }
+
     // Remove opener from DOM after the sliding doors finish parting
     window.setTimeout(() => setShowOpener(false), 1200);
   };
 
+  const toggleMusic = () => {
+    if (!playerRef.current || !isReadyRef.current) {
+      autoPlayRequestedRef.current = true;
+      return;
+    }
+
+    try {
+      if (isPlaying) {
+        playerRef.current.pauseVideo();
+        setIsPlaying(false);
+      } else {
+        playerRef.current.unMute();
+        playerRef.current.setVolume(85);
+        if (!hasStartedRef.current) {
+          playerRef.current.seekTo(MUSIC_START_TIME, true);
+          hasStartedRef.current = true;
+        }
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+      }
+    } catch (err) {
+      console.warn("Toggle music error:", err);
+    }
+  };
+
   return (
     <Jsx.Fragment>
+      {/* Off-screen YouTube IFrame element */}
+      <div
+        style={{
+          position: "fixed",
+          bottom: "-400px",
+          right: "-400px",
+          width: "200px",
+          height: "200px",
+          opacity: 0.001,
+          pointerEvents: "none",
+          zIndex: -100,
+          overflow: "hidden",
+        }}
+        aria-hidden="true"
+      >
+        <div id="wedding-yt-audio" />
+      </div>
+
+      {/* Floating Music Control Button */}
+      <FloatingMusicButton
+        isPlaying={isPlaying}
+        onToggle={toggleMusic}
+        isVisible={isOpen}
+      />
+
       <AnimatePresence>
         {showOpener && <EnvelopeOpener key="opener" onOpen={handleOpen} />}
       </AnimatePresence>
