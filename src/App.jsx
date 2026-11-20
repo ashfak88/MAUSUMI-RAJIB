@@ -96,6 +96,8 @@ const IconCalendarPlus = createIcon("calendar-plus", [
 ]);
 
 const IconChevronDown = createIcon("chevron-down", [["path", { d: "m6 9 6 6 6-6", key: "qrunsl" }]]);
+const IconChevronLeft = createIcon("chevron-left", [["path", { d: "m15 18-6-6 6-6", key: "148f4l" }]]);
+const IconChevronRight = createIcon("chevron-right", [["path", { d: "m9 18 6-6-6-6", key: "484f4r" }]]);
 
 const IconClock = createIcon("clock", [
   ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
@@ -264,85 +266,57 @@ function FloatingPetals({ count = 14, burst = false }) {
 
 const WEDDING_DATA = {
   bride: {
-    name: "Priyanka",
-    fullName: "Priyanka Prakash Kadam",
+    name: "Mausumi",
+    fullName: "Mausumi Beperi",
     parents: {
-      father: "Prakash Baburao Kadam",
-      mother: "Asha Prakash Kadam",
+      father: "Nripendra Narayan Beperi",
+      mother: "Mamoni Beperi",
     },
-    line: "Daughter of Mr. Prakash Baburao Kadam & Mrs. Asha Prakash Kadam",
-    image: "/images/bride.png",
+    line: "Daughter of Mr. Nripendra Narayan Beperi & Mrs. Mamoni Beperi",
+    image: "/gallery/DSC_4786.jpg",
   },
   groom: {
-    name: "Aniket",
-    fullName: "Aniket Deepak Vaidi",
+    name: "Rajib",
+    fullName: "Rajib Roy",
     parents: {
-      father: "Deepak Hiranna Vaidi",
-      mother: "Vijayashree Deepak Vaidi",
+      father: "Sushil Roy",
+      mother: "Aloka Roy",
     },
-    line: "Son of Mr. Deepak Hiranna Vaidi & Mrs. Vijayashree Deepak Vaidi",
-    image: "/images/groom.png",
+    line: "Son of Mr. Sushil Roy & Mrs. Aloka Roy",
+    image: "/gallery/DSC_4769.jpg",
   },
-  dateISO: "2026-12-05T08:56:00+05:30",
-  endISO: "2026-12-05T14:00:00+05:30",
-  dateLabel: "Saturday, 5 December 2026",
-  timeLabel: "8:56 AM onwards",
-  muhurthamLabel: "Muhurtham · 8:56 AM",
+  dateISO: "2026-11-25T22:00:00+05:30",
+  endISO: "2026-11-26T03:00:00+05:30",
+  dateLabel: "Wednesday, 25 November 2026",
+  timeLabel: "10:00 PM onwards",
+  muhurthamLabel: "Wedding · 10:00 PM",
   venue: {
-    name: "Sea Royal Cafe",
-    address: "Sea Royal Cafe, Navapur Beach, Virar West, 401303",
-    mapUrl:
-      "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x3be7ab692bc5e96b:0x4c3263e61434233d?entry=s&sa=X&ved=2ahUKEwjroczKyYyYAxUO1zgGHYs6JG4Q4kB6BAgeEAA&hl=en",
+    name: "Baromera",
+    address: "Baromera",
+    mapUrl: "https://goo.gl/maps/6kYq2x1wtKtLDLDd6?g_st=ac",
   },
   functions: [
     {
-      id: "priyanka-haldi",
-      name: "Priyanka's Haldi",
-      subtitle: "Ghar ki Haldi",
+      id: "haldi-mehendi",
+      name: "Haldi & Mehendi",
+      subtitle: "Auspicious Celebrations",
       icon: IconSun,
-      date: "3rd Dec 2026",
-      day: "Thursday",
-      time: "7:00 PM onwards",
-      venue: "C-703, Rashmi Lakeview, Achole Road, Nallasopara East",
-    },
-    {
-      id: "couple-haldi",
-      name: "Bride & Groom Haldi",
-      subtitle: "Phoolowali Haldi",
-      icon: IconSun,
-      date: "4th Dec 2026",
-      day: "Friday",
-      time: "12:00 PM onwards",
-      venue: "Sea Royal Cafe, Navapur Beach, Virar West",
-      dressTheme: {
-        guests: "White & Pastels",
-      },
-    },
-    {
-      id: "sangeet",
-      name: "Sangeet Ceremony",
-      subtitle: "Musical Night",
-      icon: IconMusic,
-      date: "4th Dec 2026",
-      day: "Friday",
-      time: "7:00 PM onwards",
-      venue: "Sea Royal Cafe, Navapur Beach, Virar West",
-      dressTheme: {
-        couple: "Glamorous coordinated outfits",
-        guests: "Jewel Tones, Black, Metallics & Festive Indian Wear",
-      },
+      date: "25th Nov 2026",
+      day: "Wednesday",
+      time: "10:00 PM onwards",
+      venue: "Baromera",
+      mapUrl: "https://goo.gl/maps/6kYq2x1wtKtLDLDd6?g_st=ac",
     },
     {
       id: "wedding",
       name: "Wedding Ceremony",
       subtitle: "The Sacred Muhurtham",
       icon: IconHeart,
-      date: "5th Dec 2026",
-      day: "Saturday",
-      time: "8:56 AM (Muhurtham)",
-      venue: "Sea Royal Cafe, Navapur Beach, Virar West 401303",
-      mapUrl:
-        "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x3be7ab692bc5e96b:0x4c3263e61434233d?entry=s&sa=X&ved=2ahUKEwjroczKyYyYAxUO1zgGHYs6JG4Q4kB6BAgeEAA&hl=en",
+      date: "25th Nov 2026",
+      day: "Wednesday",
+      time: "10:00 PM onwards",
+      venue: "Baromera",
+      mapUrl: "https://goo.gl/maps/6kYq2x1wtKtLDLDd6?g_st=ac",
       highlight: true,
     },
     {
@@ -350,15 +324,31 @@ const WEDDING_DATA = {
       name: "Reception Ceremony",
       subtitle: "Celebration & Blessings",
       icon: IconSparkles,
-      date: "5th Dec 2026",
-      day: "Saturday",
-      time: "6:30 PM onwards",
-      venue: "Sea Royal Cafe, Navapur Beach, Virar West",
-      mapUrl:
-        "https://maps.google.com/maps/place//data=!4m2!3m1!1s0x3be7ab692bc5e96b:0x4c3263e61434233d?entry=s&sa=X&ved=2ahUKEwjroczKyYyYAxUO1zgGHYs6JG4Q4kB6BAgeEAA&hl=en",
+      date: "27th Nov 2026",
+      day: "Friday",
+      time: "4:00 PM onwards",
+      venue: "Kaldoba (Kaldoba Pt II)",
+      mapUrl: "https://maps.google.com/?q=26.215859,89.775972",
     },
   ],
-  contacts: ["8806901483", "9028234119"],
+  gallery: [
+    "/gallery/DSC_4739.jpg",
+    "/gallery/DSC_4742.jpg",
+    "/gallery/DSC_4743.jpg",
+    "/gallery/DSC_4747.jpg",
+    "/gallery/DSC_4754.jpg",
+    "/gallery/DSC_4760.jpg",
+    "/gallery/DSC_4769.jpg",
+    "/gallery/DSC_4776.jpg",
+    "/gallery/DSC_4786.jpg",
+    "/gallery/DSC_4807.jpg",
+    "/gallery/DSC_4879.jpg",
+    "/gallery/DSC_4880.jpg",
+    "/gallery/DSC_4886.jpg",
+    "/gallery/DSC_4894.jpg",
+    "/gallery/DSC_4896.jpg",
+  ],
+  contacts: ["9365717051"],
 };
 
 function HeroSection() {
@@ -464,7 +454,7 @@ function HeroSection() {
             transition={{ delay: 1.15, duration: 0.9 }}
             className="text-ivory mt-6 text-base tracking-[0.4em] uppercase font-medium"
           >
-            05 · 12 · 2026
+            25 · 11 · 2026
           </motion.p>
           <motion.p
             initial={{ opacity: 0 }}
@@ -472,7 +462,7 @@ function HeroSection() {
             transition={{ delay: 1.35, duration: 0.9 }}
             className="text-ivory/70 mt-2 text-xs tracking-[0.28em] uppercase"
           >
-            Saturday · Sea Royal Cafe, Virar
+            Wednesday · Baromera
           </motion.p>
         </motion.div>
       </div>
@@ -559,11 +549,28 @@ function SectionDivider({ label }) {
 function PersonCard({ person, role }) {
   return (
     <FadeIn className="relative">
-      <div className="bg-[#FAF7F0] border border-gold/45 shadow-luxe relative overflow-hidden rounded-[2.25rem] px-6 sm:px-8 py-10 min-h-[250px] flex flex-col justify-center">
+      <div className="bg-[#FAF7F0] border border-gold/45 shadow-luxe relative overflow-hidden rounded-[2.25rem] px-6 sm:px-8 py-8 min-h-[250px] flex flex-col justify-center">
         {/* Subtle decorative inner border */}
         <div className="pointer-events-none absolute inset-2.5 rounded-[1.75rem] border border-gold/20" />
 
         <div className="relative z-10 flex flex-col items-center text-center w-full">
+          {/* Couple portrait from new images */}
+          {person.image && (
+            <div className="relative mb-5">
+              <div className="relative h-32 w-32 sm:h-36 sm:w-36 overflow-hidden rounded-full border-2 border-gold/60 shadow-gold p-1 bg-gradient-to-tr from-gold/40 via-gold/10 to-gold/40">
+                <img
+                  src={person.image}
+                  alt={person.fullName}
+                  loading="lazy"
+                  className="h-full w-full object-cover rounded-full"
+                />
+              </div>
+              <span className="absolute -bottom-1 left-1/2 -translate-x-1/2 bg-secondary text-gold px-3 py-0.5 rounded-full border border-gold/40 text-[0.62rem] tracking-[0.2em] uppercase font-semibold">
+                ✦
+              </span>
+            </div>
+          )}
+
           {/* Role header with gold wings */}
           <div className="inline-flex items-center justify-center gap-2.5">
             <span className="rule-gold w-8 opacity-70" />
@@ -653,6 +660,109 @@ function CoupleSection() {
   );
 }
 
+function GallerySection() {
+  if (!WEDDING_DATA.gallery || WEDDING_DATA.gallery.length === 0) return null;
+  const scrollRef = React.useRef(null);
+  const [activeIndex, setActiveIndex] = React.useState(0);
+
+  const photoTitles = [
+    "Together in Love","Moments of Joy","Cherished Vows",
+    "A Beautiful Beginning","Heartbeats as One","Golden Smiles",
+    "Timeless Bond","Forever & Always","Sweet Whispers",
+    "Walking Hand in Hand","Radiant Together","Our Eternal Story",
+    "Blissful Moments","Love Unfolding","Hearts Entwined",
+  ];
+
+  const scrollToIdx = React.useCallback((idx) => {
+    if (!scrollRef.current) return;
+    const cards = scrollRef.current.querySelectorAll("[data-gallery-card]");
+    if (cards[idx]) cards[idx].scrollIntoView({ behavior: "smooth", block: "nearest", inline: "center" });
+  }, []);
+
+  const scroll = (dir) => {
+    const next = dir === "left"
+      ? Math.max(activeIndex - 1, 0)
+      : Math.min(activeIndex + 1, WEDDING_DATA.gallery.length - 1);
+    scrollToIdx(next);
+  };
+
+  const handleScroll = () => {
+    if (!scrollRef.current) return;
+    const c = scrollRef.current;
+    const center = c.scrollLeft + c.offsetWidth / 2;
+    let best = 0, bestDist = Infinity;
+    c.querySelectorAll("[data-gallery-card]").forEach((el, i) => {
+      const d = Math.abs((el.offsetLeft + el.offsetWidth / 2) - center);
+      if (d < bestDist) { bestDist = d; best = i; }
+    });
+    setActiveIndex(best);
+  };
+
+  const gold = "#d4af37";
+
+  return (
+    <section style={{ position:"relative", overflow:"hidden", padding:"64px 0", background:"var(--background)", borderTop:"1px solid rgba(212,175,55,0.2)", borderBottom:"1px solid rgba(212,175,55,0.2)" }}>
+      <div style={{ pointerEvents:"none", position:"absolute", inset:0, opacity:0.4 }}>
+        <div style={{ position:"absolute", top:"25%", left:"50%", transform:"translateX(-50%)", width:"288px", height:"288px", borderRadius:"50%", filter:"blur(64px)", background:"rgba(212,175,55,0.15)" }} />
+      </div>
+      <div style={{ textAlign:"center", marginBottom:"32px", padding:"0 20px" }}>
+        <div style={{ display:"inline-flex", alignItems:"center", gap:"12px", marginBottom:"8px" }}>
+          <span style={{ display:"block", width:"40px", height:"1px", background:"linear-gradient(90deg,transparent,#d4af37 50%,transparent)" }} />
+          <span style={{ color:gold, fontSize:"0.68rem", letterSpacing:"0.35em", textTransform:"uppercase", fontWeight:600 }}>Moments of Love</span>
+          <span style={{ display:"block", width:"40px", height:"1px", background:"linear-gradient(90deg,transparent,#d4af37 50%,transparent)" }} />
+        </div>
+        <h2 style={{ color:"#f5f0e8", fontSize:"clamp(1.5rem,6vw,2rem)", fontWeight:300, letterSpacing:"0.12em", textTransform:"uppercase", fontFamily:"Cinzel Decorative, serif", margin:"4px 0" }}>Captured Memories</h2>
+        <p style={{ color:"rgba(212,175,55,0.75)", fontSize:"0.68rem", letterSpacing:"0.25em", textTransform:"uppercase", marginTop:"6px" }}>Swipe gently to explore</p>
+      </div>
+      <div
+        ref={scrollRef}
+        onScroll={handleScroll}
+        style={{ display:"flex", overflowX:"auto", scrollSnapType:"x mandatory", WebkitOverflowScrolling:"touch", scrollbarWidth:"none", msOverflowStyle:"none", gap:"14px", paddingLeft:"11%", paddingRight:"11%", paddingTop:"8px", paddingBottom:"8px" }}
+      >
+        {WEDDING_DATA.gallery.map((imgSrc, idx) => {
+          const isActive = idx === activeIndex;
+          return (
+            <div
+              key={idx}
+              data-gallery-card
+              onClick={() => scrollToIdx(idx)}
+              style={{ flexShrink:0, width:"78%", maxWidth:"310px", scrollSnapAlign:"center", transition:"transform 0.4s ease, opacity 0.4s ease", transform:isActive?"scale(1)":"scale(0.9)", opacity:isActive?1:0.6, cursor:"pointer" }}
+            >
+              <div style={{ borderRadius:"28px", border:isActive?"2px solid rgba(212,175,55,0.9)":"2px solid rgba(212,175,55,0.4)", padding:"4px", background:"linear-gradient(180deg,rgba(212,175,55,0.45) 0%,rgba(212,175,55,0.08) 50%,rgba(212,175,55,0.3) 100%)", boxShadow:isActive?"0 8px 40px rgba(212,175,55,0.3),0 2px 16px rgba(0,0,0,0.7)":"0 4px 20px rgba(0,0,0,0.5)" }}>
+                <div style={{ borderRadius:"22px", overflow:"hidden", background:"#0a0002", width:"100%", aspectRatio:"3/4", display:"flex", alignItems:"center", justifyContent:"center" }}>
+                  <img
+                    src={imgSrc}
+                    alt={"Memory " + (idx + 1)}
+                    loading="lazy"
+                    style={{ width:"100%", height:"100%", objectFit:"contain", objectPosition:"center", display:"block" }}
+                  />
+                </div>
+              </div>
+              <p style={{ textAlign:"center", marginTop:"10px", fontSize:"0.72rem", letterSpacing:"0.16em", fontStyle:"italic", fontFamily:"Georgia, serif", color:isActive?"rgba(212,175,55,0.95)":"rgba(212,175,55,0.4)", transition:"color 0.4s" }}>
+                <span style={{ fontFamily:"Jost, sans-serif", fontWeight:700, fontStyle:"normal", marginRight:"5px" }}>{String(idx + 1).padStart(2,"0")}</span>
+                � {photoTitles[idx % photoTitles.length]}
+              </p>
+            </div>
+          );
+        })}
+      </div>
+      <div style={{ display:"flex", alignItems:"center", justifyContent:"space-between", maxWidth:"400px", margin:"20px auto 0", padding:"0 24px" }}>
+        <button onClick={() => scroll("left")} aria-label="Previous" style={{ width:"40px", height:"40px", borderRadius:"50%", border:"1px solid rgba(212,175,55,0.5)", background:"rgba(26,4,7,0.9)", color:gold, display:"grid", placeItems:"center", cursor:"pointer" }}>
+          <IconChevronLeft style={{ width:"20px", height:"20px" }} />
+        </button>
+        <div style={{ display:"flex", gap:"6px", alignItems:"center", overflow:"hidden", maxWidth:"180px", padding:"0 8px" }}>
+          {WEDDING_DATA.gallery.map((_,i) => (
+            <span key={i} onClick={() => scrollToIdx(i)} style={{ height:"6px", borderRadius:"3px", background:i===activeIndex?gold:"rgba(212,175,55,0.3)", width:i===activeIndex?"20px":"6px", transition:"all 0.3s", flexShrink:0, cursor:"pointer", display:"block" }} />
+          ))}
+        </div>
+        <button onClick={() => scroll("right")} aria-label="Next" style={{ width:"40px", height:"40px", borderRadius:"50%", border:"1px solid rgba(212,175,55,0.5)", background:"rgba(26,4,7,0.9)", color:gold, display:"grid", placeItems:"center", cursor:"pointer" }}>
+          <IconChevronRight style={{ width:"20px", height:"20px" }} />
+        </button>
+      </div>
+    </section>
+  );
+}
+
 const weddingTimestamp = new Date(WEDDING_DATA.dateISO).getTime();
 
 function calculateTimeLeft() {
@@ -727,7 +837,7 @@ function CountdownSection() {
         </FadeIn>
         <FadeIn delay={0.2}>
           <p className="text-ivory/65 mt-6 text-xs tracking-[0.25em] uppercase font-light">
-            {WEDDING_DATA.dateLabel} · 8:56 AM
+            {WEDDING_DATA.dateLabel} · 10:00 PM
           </p>
         </FadeIn>
       </div>
@@ -743,7 +853,7 @@ function downloadIcsCalendar() {
   const icsData = [
     "BEGIN:VCALENDAR",
     "VERSION:2.0",
-    "PRODID:-//Aniket & Priyanka Wedding//EN",
+    "PRODID:-//Rajib & Mausumi Wedding//EN",
     "BEGIN:VEVENT",
     `UID:${Date.now()}@wedding`,
     `DTSTAMP:${formatIcsDate(new Date().toISOString())}`,
@@ -751,7 +861,7 @@ function downloadIcsCalendar() {
     `DTEND:${formatIcsDate(WEDDING_DATA.endISO)}`,
     `SUMMARY:${WEDDING_DATA.groom.name} & ${WEDDING_DATA.bride.name} Wedding`,
     `LOCATION:${WEDDING_DATA.venue.name}, ${WEDDING_DATA.venue.address}`,
-    `DESCRIPTION:Together with their families, Aniket & Priyanka invite you to celebrate their wedding ceremony at Sea Royal Cafe, Navapur Beach, Virar West.`,
+    `DESCRIPTION:Together with their families, ${WEDDING_DATA.groom.name} & ${WEDDING_DATA.bride.name} invite you to celebrate their wedding ceremony at ${WEDDING_DATA.venue.name}.`,
     "END:VEVENT",
     "END:VCALENDAR",
   ].join("\r\n");
@@ -760,7 +870,7 @@ function downloadIcsCalendar() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `aniket-priyanka-wedding.ics`;
+  link.download = `rajib-mausumi-wedding.ics`;
   link.click();
   URL.revokeObjectURL(url);
 }
@@ -1039,13 +1149,13 @@ function CelebrationSection() {
                 Save the date
               </p>
               <p className="text-ivory font-display mt-2 text-5xl font-light">
-                05
+                25
               </p>
               <p className="text-ivory/85 text-sm tracking-[0.35em] uppercase">
-                December 2026
+                November 2026
               </p>
               <p className="text-gold/90 text-xs tracking-[0.25em] uppercase mt-1 font-light">
-                Saturday · 8:56 AM
+                Wednesday · 10:00 PM
               </p>
             </div>
             <div className="divide-gold/15 divide-y">
@@ -1203,7 +1313,7 @@ function FooterSection() {
               <span className="flex-1 text-left">{WEDDING_DATA.groom.name}</span>
             </p>
             <p className="text-ivory/50 mt-2 text-[0.6rem] tracking-[0.4em] uppercase">
-              05 · 12 · 2026 · Virar
+              25 · 11 · 2026 · Baromera
             </p>
           </div>
         </FadeIn>
@@ -1382,6 +1492,7 @@ export default function WeddingApp() {
         <CountdownSection />
         <FunctionsSection />
         <CelebrationSection />
+        <GallerySection />
         <FooterSection />
       </main>
     </Jsx.Fragment>
